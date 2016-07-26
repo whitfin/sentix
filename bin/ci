@@ -1,0 +1,69 @@
+#!/bin/bash
+
+on_os () {
+  os="$1"
+  shift
+
+  if [ "$TRAVIS_OS_NAME" = "$os" ]; then
+    echo "${@}"
+    eval "${@}"
+    return $?
+  else
+    return 0
+  fi
+}
+
+on_linux () {
+  on_os "linux" "${@}"
+}
+
+on_osx () {
+  on_os "osx" "${@}"
+}
+
+before_install () {
+  if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)" < /dev/null
+  fi
+  on_linux export PATH="$HOME/.linuxbrew/bin:$PATH"
+  on_linux export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+  on_linux export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+}
+
+before_script () {
+  export CXX=g++-4.8
+
+  brew update
+  brew install fswatch
+
+  mix compile
+
+  on_linux cp -r deps/erlexec/priv/x86_64-linux-gnu-gnu deps/erlexec/priv/x86_64-unknown-linux-gnu
+}
+
+script () {
+  mix credo --all --format=oneline
+  mix coveralls.travis --trace
+}
+
+command="$1"
+shift
+case $command in
+  before_install)
+    before_install
+    ;;
+  before_script)
+    before_script
+    ;;
+  script)
+    script
+    ;;
+  *)
+    if [ -n "$command" ]; then
+      fail "Unknown command $command"
+    else
+      usage
+      exit 1
+    fi
+    ;;
+esac

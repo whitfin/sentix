@@ -1,0 +1,24 @@
+language: elixir
+elixir:
+  - 1.3.2
+  - 1.2.6
+otp_release:
+  - 19.0
+  - 18.3
+before_install:
+  - . bin/ci before_install
+before_script:
+  - . bin/ci before_script
+script:
+  - . bin/ci script
+branches:
+  only:
+    - master
+env:
+  - MIX_ENV=test
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
