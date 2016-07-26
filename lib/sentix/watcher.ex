@@ -64,15 +64,14 @@ defmodule Sentix.Watcher do
   # known subscribers (that are still alive). If a subscriber is not alive, it
   # is at this point in time that we will trim it from the subscribers list.
   def handle_info({ :stdout, proc, data }, { name, proc, subscribers }) do
-    base_message = create_event(proc, data)
+    alive_subs = Enum.filter(subscribers, &alive?/1)
+    event_list = create_events(proc, data)
 
-    filtered = Enum.filter(subscribers, fn(subscriber) ->
-      if alive?(subscriber) do
-        send(subscriber, base_message)
-      end
-    end)
+    for event <- event_list, sub <- alive_subs do
+      send(sub, event)
+    end
 
-    { :noreply, { name, proc, Cache.set_subscribers(name, filtered) } }
+    { :noreply, { name, proc, Cache.set_subscribers(name, alive_subs) } }
   end
 
   @doc false
@@ -119,15 +118,19 @@ defmodule Sentix.Watcher do
   # consisting of the process id, a type flag, and a Tuple of the filename and
   # emitted event list. The structure is inspied by that of the `fs` library in
   # order to make migration from that project easier for anyone who wishes to.
-  defp create_event(proc, data) do
-    [ file | events ] =
+  defp create_events(proc, data) do
+    messages =
       data
       |> String.replace_trailing("\n", "")
-      |> String.split(" ")
+      |> String.split("\n")
 
-    clean_events = Enum.map(events, &Bridge.convert_name/1)
+    Enum.map(messages, fn(message) ->
+      [ file | events ] = String.split(message, " ")
 
-    { proc, { :fswatch, :file_event }, { file, clean_events } }
+      clean_events = Enum.map(events, &Bridge.convert_name/1)
+
+      { proc, { :fswatch, :file_event }, { file, clean_events } }
+    end)
   end
 
   # Handles the subscription of a new subscriber to the watcher. We only allow
