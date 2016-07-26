@@ -82,7 +82,7 @@ defmodule Sentix.Watcher do
   # that at this point, simply log the error.
   def handle_info({ :stderr, _proc, data }, state) do
     data
-    |> String.trim
+    |> String.replace_trailing("\n", "")
     |> Logger.error
     { :noreply, state }
   end
@@ -122,7 +122,7 @@ defmodule Sentix.Watcher do
   defp create_event(proc, data) do
     [ file | events ] =
       data
-      |> String.trim
+      |> String.replace_trailing("\n", "")
       |> String.split(" ")
 
     clean_events = Enum.map(events, &Bridge.convert_name/1)
