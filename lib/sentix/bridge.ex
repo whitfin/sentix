@@ -101,7 +101,7 @@ defmodule Sentix.Bridge do
   defp join_port(port, priv) do
     priv
     |> Path.join(port)
-    |> String.to_charlist
+    |> :binary.bin_to_list
   end
 
 end
