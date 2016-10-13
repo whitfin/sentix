@@ -60,8 +60,8 @@ defmodule Sentix.Mixfile do
   defp deps do
     [
       # Production dependencies
-      { :cachex,  "~> 1.2" },
-      { :erlexec, "~> 1.2" },
+      { :cachex,  "~> 2.0" },
+      { :erlexec, "~> 1.2.0" },
       # Development dependencies
       { :credo,       "~> 0.4.5",  optional: true, only: [ :dev, :test ] },
       { :ex_doc,      "~> 0.12.0", optional: true, only: [ :dev, :test ] },
