@@ -37,8 +37,6 @@ before_script () {
   brew install fswatch
 
   mix compile
-
-  on_linux cp -r deps/erlexec/priv/x86_64-linux-gnu-gnu deps/erlexec/priv/x86_64-unknown-linux-gnu
 }
 
 script () {

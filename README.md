@@ -11,7 +11,7 @@ Sentix is available in Hex so you can install it pretty easily:
 
     ```elixir
     def deps do
-      [{:sentix, "~> 1.0.0"}]
+      [{:sentix, "~> 1.0"}]
     end
     ```
 

@@ -13,7 +13,7 @@ defmodule Sentix.Application do
     # Define workers and child supervisors to be supervised
     children = [
       worker(Cachex, [ Sentix ]),
-      worker(:exec, [[ :root ]])
+      worker(:exec, [[ :root, portexe: Sentix.Bridge.locate_port() ]])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
@@ -21,4 +21,5 @@ defmodule Sentix.Application do
     opts = [strategy: :one_for_one, name: Sentix.Supervisor]
     Supervisor.start_link(children, opts)
   end
+
 end

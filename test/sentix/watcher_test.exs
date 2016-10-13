@@ -77,7 +77,7 @@ defmodule Sentix.WatcherTest do
 
     receive do
       msg ->
-        { proc, { :fswatch, :file_event }, _payload } = msg
+        { _proc, { :fswatch, :file_event }, _payload } = msg
         assert(Cache.get_subscribers(state.name) == [ self() ])
     after
       1000 ->
