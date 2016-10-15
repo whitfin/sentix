@@ -6,9 +6,9 @@ defmodule Sentix.Bridge do
   """
 
   # add internal aliases
-  alias __MODULE__.{
-    Command, Options
-  }
+  alias __MODULE__.Command
+  alias __MODULE__.Options
+  alias Sentix.Cache
 
   @doc """
   Opens a bridged port to `fswatch`, using the provided paths and options.
@@ -25,7 +25,7 @@ defmodule Sentix.Bridge do
         { :error, reason :: atom } |
         { :error, reason :: binary }
   def open(paths, options \\ []) when is_list(paths) and is_list(options) do
-    with { :ok,  exe } <- Command.locate_fswatch(),
+    with { :ok,  exe } <- Cache.find_binary('fswatch'),
          { :ok, opts } <- Options.parse(options),
          { :ok,  cmd } <- Command.generate(exe, opts, paths),
      do: :exec.run(cmd, [ :stdout, :stderr, :monitor ])

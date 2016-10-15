@@ -9,9 +9,8 @@ defmodule Sentix.Watcher do
   require Logger
 
   # add some aliases
-  alias Sentix.{
-    Bridge, Bridge.Command, Cache
-  }
+  alias Sentix.Bridge
+  alias Sentix.Cache
 
   @doc """
   Starts a Sentix watcher using the provided name, paths and options.
@@ -22,7 +21,7 @@ defmodule Sentix.Watcher do
         { :ok, pid } |
         { :error, reason :: atom | binary }
   def start_link(name, paths, options) do
-    with { :ok, _exe } <- Command.locate_fswatch() do
+    with { :ok, _exe } <- Cache.find_binary('fswatch') do
       GenServer.start_link(__MODULE__, { name, paths, options }, [ name: name ])
     end
   end

@@ -59,7 +59,7 @@ defmodule Sentix.Cache do
         { :error, reason :: binary }
   def find_binary(name) do
     case Cachex.get!(Sentix, name, fallback: &do_find_binary/1) do
-      nil -> { :error, "#{name} not found on system, is it installed?" }
+      nil -> { :error, :missing_binary }
       val -> { :ok, val }
     end
   end

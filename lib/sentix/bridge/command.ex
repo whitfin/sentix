@@ -31,14 +31,6 @@ defmodule Sentix.Bridge.Command do
     |> elem(1)
   end
 
-  @doc """
-  Provides the location of the `fswatch` executable.
-  """
-  @spec locate_fswatch() :: { :ok, path :: binary } | { :error, reason :: binary }
-  def locate_fswatch do
-    Cache.find_binary('fswatch')
-  end
-
   # Flattens the input parameters by moving through the potential lists of binaries
   # and prepending them to a single level list. Each binary is converted to a
   # charlist as this is the format required when starting ports. It should be noted

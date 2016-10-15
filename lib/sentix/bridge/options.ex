@@ -43,9 +43,7 @@ defmodule Sentix.Bridge.Options do
   """
   @spec parse!(options :: Keyword.t) :: options :: [ binary ]
   def parse!(options \\ []) when is_list(options) do
-    options
-    |> parse
-    |> elem(1)
+    options |> parse |> elem(1)
   end
 
   # Parses out an option from the list of options and transforms it (if existing)
