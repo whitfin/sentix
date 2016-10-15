@@ -5,9 +5,6 @@ defmodule Sentix.Bridge.Command do
   testing.
   """
 
-  # alias the cache
-  alias Sentix.Cache
-
   @doc """
   Generates a flattened list of command segments which can be used to spawn an
   `fswatch` port.
