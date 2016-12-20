@@ -14,6 +14,9 @@ before_script:
   - . bin/ci before_script
 script:
   - . bin/ci script
+after_script:
+  - mix deps.get --only docs
+  - MIX_ENV=docs mix inch.report
 branches:
   only:
     - master

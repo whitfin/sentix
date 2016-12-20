@@ -65,6 +65,7 @@ defmodule Sentix.Mixfile do
       # Development dependencies
       { :credo,       "~> 0.4.5",  optional: true, only: [ :dev, :test ] },
       { :ex_doc,      "~> 0.12.0", optional: true, only: [ :dev, :test ] },
+      { :inch_ex,     "~> 0.5.4",  optional: true, only: [ :docs] },
       { :excoveralls, "~> 0.5.5",  optional: true, only: [ :dev, :test ] }
     ]
   end
