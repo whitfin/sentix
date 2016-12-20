@@ -1,5 +1,5 @@
 # Sentix
-[![Build Status](https://img.shields.io/travis/zackehh/sentix.svg)](https://travis-ci.org/zackehh/sentix) [![Coverage Status](https://img.shields.io/coveralls/zackehh/sentix.svg)](https://coveralls.io/github/zackehh/sentix) [![Hex.pm Version](https://img.shields.io/hexpm/v/sentix.svg)](https://hex.pm/packages/sentix) [![Documentation](https://img.shields.io/badge/docs-latest-yellowgreen.svg)](https://hexdocs.pm/sentix/)
+[![Build Status](https://img.shields.io/travis/zackehh/sentix.svg)](https://travis-ci.org/zackehh/sentix) [![Coverage Status](https://img.shields.io/coveralls/zackehh/sentix.svg)](https://coveralls.io/github/zackehh/sentix) [![Inline docs](http://inch-ci.org/github/zackehh/sentix.svg)](http://inch-ci.org/github/zackehh/sentix) [![Hex.pm Version](https://img.shields.io/hexpm/v/sentix.svg)](https://hex.pm/packages/sentix) [![Documentation](https://img.shields.io/badge/docs-latest-yellowgreen.svg)](https://hexdocs.pm/sentix/)
 
 Sentix is a file system watcher based on [fswatch](https://github.com/emcrisostomo/fswatch). It provides a stable port binding around `fswatch` (with configurable arguments) and translates the output to messages that are easy to work with from inside Elixir. Naturally, it goes without saying that you need `fswatch` installed to use this tool properly.
 
