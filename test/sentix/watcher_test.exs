@@ -73,7 +73,7 @@ defmodule Sentix.WatcherTest do
     Process.exit(pid, :kill)
 
     # touch our file
-    touch_file("/tmp/watched_file")
+    touch_file("/tmp/watched file")
 
     # we can't match events on all platforms here
     receive do
@@ -83,7 +83,7 @@ defmodule Sentix.WatcherTest do
 
         # verify all flags are correct
         assert(proc == process)
-        assert(file =~ "/tmp/watched_file")
+        assert(file =~ "/tmp/watched file")
         assert(:created in events)
 
         # retrieve subscribers

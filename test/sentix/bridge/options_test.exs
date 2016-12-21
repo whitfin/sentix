@@ -121,6 +121,6 @@ defmodule Sentix.Bridge.OptionsTest do
 
   # Just adds default arguments to the provided options, rather than having to
   # keep writing it out and potentially not getting it correct.
-  defp add_defaults(opts), do: [ "-x" | opts ]
+  defp add_defaults(opts), do: opts ++ Sentix.Bridge.Options.defaults()
 
 end

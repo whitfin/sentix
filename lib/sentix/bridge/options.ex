@@ -9,6 +9,16 @@ defmodule Sentix.Bridge.Options do
   alias Sentix.Bridge
 
   @doc """
+  Simple accessor for default options.
+
+  This only exists so that we may verify them from test code.
+  """
+  @spec defaults :: options :: [ binary ]
+  def defaults do
+    [ "-x", "--event-flag-separator=#{Bridge.divider()}" ]
+  end
+
+  @doc """
   Parses out any option flags into command line arguments.
 
   This function may return arbitrarily nested lists which need flattened before
@@ -18,7 +28,6 @@ defmodule Sentix.Bridge.Options do
   @spec parse(options :: Keyword.t) :: options :: [ binary ]
   def parse(options \\ []) when is_list(options) do
     opts = Enum.concat([
-      [ "-x" ],
       parse_opt(options, :access,      "-a", &parse_truthy_flag/2),
       parse_opt(options, :dir_only,    "-d", &parse_truthy_flag/2),
       parse_opt(options, :excludes,    "-e"),
@@ -32,7 +41,8 @@ defmodule Sentix.Bridge.Options do
         val <= 1.0 and val >= 0.1 && [ flag, inspect(val) ] || []
       end),
       parse_opt(options, :monitor,     "-m"),
-      parse_opt(options, :recursive,   "-r", &parse_truthy_flag/2)
+      parse_opt(options, :recursive,   "-r", &parse_truthy_flag/2),
+      defaults()
     ])
     { :ok, opts }
   end

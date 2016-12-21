@@ -21,8 +21,9 @@ defmodule Sentix.Bridge.CommandTest do
     # ensure the conversion translates correctly
     assert(results == [
       '/usr/bin/fswatch',
-      '-x',
       '-r',
+      '-x',
+      '--event-flag-separator=__stx__',
       '/tmp/watched_directory'
     ])
   end

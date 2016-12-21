@@ -124,11 +124,18 @@ defmodule Sentix.Watcher do
       |> String.split("\n")
 
     Enum.map(messages, fn(message) ->
-      [ file | events ] = String.split(message, " ")
+      { tchunk, [ echunk ] } =
+        message
+        |> String.split(" ")
+        |> Enum.split(-1)
 
-      clean_events = Enum.map(events, &Bridge.convert_name/1)
+      target = Enum.join(tchunk, " ")
+      events =
+        echunk
+        |> String.split(Bridge.divider())
+        |> Enum.map(&Bridge.convert_name/1)
 
-      { proc, { :fswatch, :file_event }, { file, clean_events } }
+      { proc, { :fswatch, :file_event }, { target, events } }
     end)
   end
 

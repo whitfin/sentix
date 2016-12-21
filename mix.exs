@@ -25,7 +25,7 @@ defmodule Sentix.Mixfile do
       },
       version: "1.0.2",
       elixir: "~> 1.2",
-      deps: deps,
+      deps: deps(),
       docs: [
         extras: [ "README.md" ],
         source_ref: "master",
@@ -61,11 +61,11 @@ defmodule Sentix.Mixfile do
     [
       # Production dependencies
       { :cachex,  "~> 2.0" },
-      { :erlexec, "~> 1.2.0" },
+      { :erlexec,  "1.2.2" },
       # Development dependencies
-      { :credo,       "~> 0.4.5",  optional: true, only: [ :dev, :test ] },
-      { :ex_doc,      "~> 0.12.0", optional: true, only: [ :dev, :test ] },
-      { :excoveralls, "~> 0.5.5",  optional: true, only: [ :dev, :test ] }
+      { :credo,       "~> 0.4",  optional: true, only: [ :dev, :test ] },
+      { :ex_doc,      "~> 0.12", optional: true, only: [ :dev, :test ] },
+      { :excoveralls, "~> 0.5",  optional: true, only: [ :dev, :test ] }
     ]
   end
 end

@@ -65,6 +65,14 @@ defmodule Sentix.Bridge do
     do: convert_name(event)
 
   @doc """
+  Returns the separator for use when splitting fswatch events.
+  """
+  @spec divider :: binary
+  def divider do
+    "__stx__"
+  end
+
+  @doc """
   Locates the port driver for the current toolchain.
 
   This is done via a wildcard search, as the name of the port is not deterministic
