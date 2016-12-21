@@ -23,7 +23,7 @@ defmodule Sentix.Mixfile do
         },
         maintainers: [ "Isaac Whitfield" ]
       },
-      version: "1.0.2",
+      version: "1.0.3",
       elixir: "~> 1.2",
       deps: deps(),
       docs: [
