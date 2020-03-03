@@ -9,19 +9,19 @@ Sentix is available in Hex so you can install it pretty easily:
 
   1. Add `sentix` to your list of dependencies in `mix.exs`:
 
-    ```elixir
-    def deps do
-      [{:sentix, "~> 1.0"}]
-    end
-    ```
+```elixir
+  def deps do
+    [{:sentix, "~> 1.0"}]
+  end
+```
 
   2. Ensure `sentix` is started before your application:
 
-    ```elixir
-    def application do
-      [applications: [:sentix]]
-    end
-    ```
+```elixir
+  def application do
+    [applications: [:sentix]]
+  end
+```
 
 As previously mentioned, installing `fswatch` is a pre-req for using Sentix.
 
